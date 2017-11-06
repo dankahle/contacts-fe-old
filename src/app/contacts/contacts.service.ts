@@ -7,7 +7,7 @@ import {Contact} from "./contacts/contact";
 export class ContactsService {
   apiUrl = environment.apiUrl;
 
-  constructor(private http:HttpClient) { }
+constructor(private http:HttpClient) {}
 
   getAll() {
     console.log(this.apiUrl + '/api/contacts');
