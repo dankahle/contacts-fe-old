@@ -3,16 +3,3 @@
 
 
 
-pass:
-got the environment apiUrl done and as such a build strategy that doens't involve combining the projects, albeit you can give that a shot if you want. Easy enough to do:
-
-npm install contacts-fe (point it to your repo
-npm install does npm install on node_modules/contacts-fe, then  "ng build --prod" your contacts-fe and have express app.use(express.static('node_modules/contacts-fe')
-
-
-so... where from here?
-
-guess we start building ngx app from here on out. Need testing on contacts-be, but leave that till the end I figure.
-
-
-
