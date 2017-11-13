@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.error-text {
+  color: red;
+}
+
+/*
+mat-form-field {
+  margin-right: 14px;
+}
+*/

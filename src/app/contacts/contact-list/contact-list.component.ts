@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Contact} from "../contacts/contact";
 import {ContactsService} from "../contacts.service";
-import {Contact} from "./contact";
 import {Store} from "../../core/store";
 
 @Component({
-  selector: 'dk-contacts',
-  templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.css'],
-  providers: []
+  selector: 'dk-contact-list',
+  templateUrl: './contact-list.component.html',
+  styleUrls: ['./contact-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class ContactsComponent {
+export class ContactListComponent {
   contacts:Contact[];
   messageCount: number;
 
@@ -21,6 +21,4 @@ export class ContactsComponent {
     contactsService.getAll()
       .subscribe(contacts => this.contacts = contacts);
   }
-
 }
-
