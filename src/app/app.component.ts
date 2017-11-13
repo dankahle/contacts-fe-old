@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Store} from "./core/store";
 
 @Component({
   selector: 'dk-root',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  constructor(store: Store) {
+  }
 
 }
