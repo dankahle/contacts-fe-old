@@ -10,7 +10,7 @@ import {PageNotFoundComponent} from './shared/components/page-not-found/page-not
 import 'hammerjs';
 
 const appRoutes: Routes = [
-  { path: '',   redirectTo: '/contact', pathMatch: 'full', canActivate: [InitializationGuard] },
+  { path: '',   redirectTo: '/contacts', pathMatch: 'full', canActivate: [InitializationGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -12,16 +12,20 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import {ContactListResolve} from "./contact-list/contact-list.resolve";
 import {ContactDetailResolve} from "./contact-detail/contact-detail.resolve";
+import {ContactDetailRouteComponent} from "./contact-detail/contact-detail-route.component";
 
 export const contactRoutes: Routes = [
   {
-    path: 'contact',
+    path: 'contacts',
     component: ContactListComponent,
     canActivate: [InitializationGuard],
     children: [
       {
         path: ':id',
-        component: ContactDetailComponent
+        component: ContactDetailRouteComponent,
+        resolve: {
+          contact: ContactDetailResolve
+        }
       }
     ]
   }
@@ -36,7 +40,8 @@ export const contactRoutes: Routes = [
     SharedModule,
     CoreModule
   ],
-  declarations: [ContactsComponent, ContactListComponent, ContactDetailComponent],
+  declarations: [ContactsComponent, ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent],
+  entryComponents: [ContactDetailComponent],
   exports: [ContactsComponent, RouterModule],
   providers: [ContactsService, ContactListResolve, ContactDetailResolve]
 })
