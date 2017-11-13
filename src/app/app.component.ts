@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {Store} from "./core/store";
 
 @Component({
   selector: 'dk-root',
@@ -7,8 +6,4 @@ import {Store} from "./core/store";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  constructor(store: Store) {
-  }
-
 }

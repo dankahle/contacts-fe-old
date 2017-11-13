@@ -8,6 +8,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {InitializationGuard} from "./initialization.guard";
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import 'hammerjs';
+import {Store} from "./core/store";
 
 const appRoutes: Routes = [
   { path: '',   redirectTo: '/contacts', pathMatch: 'full', canActivate: [InitializationGuard] },
@@ -28,4 +29,9 @@ const appRoutes: Routes = [
   providers: [InitializationGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  // initialize the Store
+  constructor(store: Store) {
+  }
+}

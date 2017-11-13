@@ -2,7 +2,7 @@
 import {Injectable} from "@angular/core";
 import {INITIAL_STATE, InitialState} from "./initial-state";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
+import {environment} from '../../environments/environment';
 
 @Injectable()
 /**
@@ -12,11 +12,20 @@ import {Observable} from "rxjs/Observable";
  * in component:
  * constructor(store Store) { store.subscribe(state => this.someval = state.someval); }
  * to update, add an update function to Store and call it, then call publish() to publish to subscribers
+ * THIS MUST BE A SINGLETON TO BE GLOBAL. It's possible you could have: Store, ContactsStore reusing the Store class with
+ * different providers.
  */
 export class Store {
   state:InitialState = INITIAL_STATE;
   state$ = new BehaviorSubject(this.state);
   subscribe = this.state$.subscribe.bind(this.state$);
+  logState = environment.logState;
+
+  constructor() {
+    if (this.logState === true) {
+      console.log(this.state);
+    }
+  }
 
   updateMessageCount(val:number) {
     this.state.messageCount = val;
@@ -25,6 +34,9 @@ export class Store {
 
   publish() {
     this.state$.next(this.state);
+    if (this.logState === true) {
+      console.log(this.state);
+    }
   }
 
 }
