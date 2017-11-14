@@ -16,7 +16,7 @@ import {ContactDetailRouteComponent} from "./contact-detail/contact-detail-route
 
 export const contactRoutes: Routes = [
   {
-    path: 'contacts',
+    path: '',
     component: ContactListComponent,
     canActivate: [InitializationGuard],
     children: [

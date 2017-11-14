@@ -11,7 +11,6 @@ import 'hammerjs';
 import {Store} from "./core/store";
 
 const appRoutes: Routes = [
-  { path: '',   redirectTo: '/contacts', pathMatch: 'full', canActivate: [InitializationGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 
