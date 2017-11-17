@@ -31,11 +31,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.dialog.open(ErrorModalComponent, config)
           .afterClosed()
           .subscribe(result => {
-            // If we have a bad id, it leaves us in the detail route after error and can't
-            // look at any other contacts. Have to navigate to '/' in that case, but only after error modal goes down
-            if (err.error.message.toLowerCase() === 'invalid id parameter') {
-              this.router.navigateByUrl('/');
-            }
+            //dankfix: if we have a bad id, might not be able to get out of that route? was a problem with deep linked contacts
+            // maybe not so with labels instead? Watch the err.error, i.e. that's only for your api, might not be there
+            // if (err.error && err.error.errorCode === 'xxx-xxxx') {
+            //   this.router.navigateByUrl('/');
+            // }
           })
         return Observable.of(err);
       })

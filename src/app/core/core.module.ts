@@ -8,6 +8,7 @@ import {TimingInterceptor} from "./interceptors/timing.interceptor";
 import {ErrorInterceptor} from "./interceptors/error.interceptor";
 import {Init1, Init2, Init3, Init4, Init5} from "./services/init-service";
 import {ValidateService} from "./services/validate.service";
+import {ModifyRequestInterceptor} from "./interceptors/modify-request.interceptor";
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {ValidateService} from "./services/validate.service";
     {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ModifyRequestInterceptor, multi: true},
     ValidateService
     ]
 })
