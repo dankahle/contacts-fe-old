@@ -17,6 +17,12 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+
+  // if in this list, then no error modal
+  whiteList = [
+    {status: 404, methods: ['GET', 'POST'],  url: new RegExp(`^${environment.apiUrl}api/login`)}
+  ];
+
   constructor(private progressService: ProgressService, public dialog: MatDialog, private router: Router) {
   }
 
@@ -28,22 +34,14 @@ export class ErrorInterceptor implements HttpInterceptor {
       .catch(resp => {
         this.progressService.hideProgressBar();
 
-        let bypassModal = false;
-        whiteList()
-          .forEach(x => {
-            if (resp.status == 404 && x.url.test(resp.url)) {
-              bypassModal = true;
-            }
-          })
-
         // base.errorHandler will always have a statusCode, so if not there, then server is down, so set {message, errorCode}
-        const err = resp.error.errorCode ? resp.error : {
+        const err = resp.error && resp.error.errorCode ? resp.error : {
           message: 'Unknown server error',
           data: {message: resp.message, status: resp.status},
-          errorCode: errorCodes.server_prefix + errorCodes.server_down
+          errorCode: errorCodes.server_prefix + errorCodes.server_unknown_error
         };
 
-        if (bypassModal) {
+        if (this.whiteListed(resp, req.method)) {
           return Observable.throw(err);
         }
 
@@ -68,17 +66,26 @@ export class ErrorInterceptor implements HttpInterceptor {
       })
   }
 
+  /**
+   * whiteListed
+   * @desc - Some 404's are an error (unexpected), while others are handled in the code (expected). We'll whitelist
+   * the expected ones so we won't get an error modal in that case. We could just pass a parameter to show no errors, but
+   * that only applies to expected errors, and even then we may want to show 400 but nto 404
+   * @param resp
+   * @param method
+   * @returns {boolean}
+   */
+  whiteListed(resp, method) {
+    let found = false;
+    this.whiteList
+      .forEach(item => {
+        if (resp.status == 404 && _.includes(item.methods, method) && item.url.test(resp.url)) {
+          found = true;
+        }
+      })
+    return found;
+  }
+
 }
 
-/**
- * whiteList
- * @desc - Some 404's are an error (unexpected), while others are handled in the code (expected). We'll whitelist
- * the expected ones so we won't get an error modal in that case
- * @returns {[{status: number; reg: RegExp}]}
- */
-function whiteList() {
-  return [
-    {status: 404, methods: ['GET', 'POST'],  url: new RegExp(`^${environment.apiUrl}api/login`)}
-  ];
-}
 
