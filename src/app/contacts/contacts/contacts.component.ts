@@ -11,16 +11,8 @@ import {Store} from "../../core/services/store";
 })
 export class ContactsComponent {
   contacts:Contact[];
-  messageCount: number;
 
-  constructor(contactsService:ContactsService, protected store: Store) {
-    store.subscribe(state => {
-      this.messageCount = state.messageCount;
-    });
-
-    contactsService.getAll()
-      .subscribe(contacts => this.contacts = contacts);
-  }
+  constructor(contactsService:ContactsService) {}
 
 }
 

@@ -10,6 +10,7 @@ import 'hammerjs';
 import {Store} from "./core/services/store";
 import {LoginComponent} from "./login/login/login.component";
 import {LoginModule} from "./login/login.module";
+import {Globals} from "./core/services/globals";
 
 const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
@@ -33,6 +34,6 @@ const appRoutes: Routes = [
 export class AppModule {
 
   // initialize the Store
-  constructor(store: Store) {
+  constructor(store: Store, globals: Globals) {
   }
 }

@@ -13,6 +13,7 @@ import {InitializationGuard} from "./guards/initialization.guard";
 import {AuthGuard} from "./guards/auth.guard";
 import {UserService} from "./services/user-service";
 import {RouterModule} from "@angular/router";
+import {Globals} from "./services/globals";
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import {RouterModule} from "@angular/router";
     HttpClientModule,
     RouterModule
   ],
-  providers: [Store, Init1, Init2, Init3, Init4, Init5, ProgressService, UserService,
+  providers: [Store, Globals, Init1, Init2, Init3, Init4, Init5, ProgressService, UserService,
     {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

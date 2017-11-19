@@ -13,11 +13,7 @@ export class ContactListComponent {
   contacts:Contact[];
   messageCount: number;
 
-  constructor(route: ActivatedRoute, protected store: Store) {
-    store.subscribe(state => {
-      this.messageCount = state.messageCount;
-    });
-
+  constructor(route: ActivatedRoute) {
     route.data.subscribe(data => {
       return this.contacts = data.contacts;
     });
