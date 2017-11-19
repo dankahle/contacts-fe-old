@@ -45,6 +45,7 @@ export class UserService {
 
   logout() {
     this.user = undefined;
+    this.store.updateUser(this.user);
     this.router.navigateByUrl('/login');
   }
 

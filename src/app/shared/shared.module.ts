@@ -8,7 +8,7 @@ import {MaxValidator} from "./validators/max.validator";
 import {MaterialIndexModule} from "./material-index/material-index.module";
 import {ProgressComponent} from "./components/progress/progress.component";
 import {ErrorModalComponent} from "./components/error-modal/error-modal.component";
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from '../login/login/login.component';
 import {RouterModule} from "@angular/router";
 
 @NgModule({
@@ -18,10 +18,10 @@ import {RouterModule} from "@angular/router";
     RouterModule,
     FormsModule
   ],
-  declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent, LoginComponent],
+  declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
   exports: [
     MaterialIndexModule,
-    PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent, LoginComponent],
+    PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],
   entryComponents: [ErrorModalComponent],
   providers: []
 })

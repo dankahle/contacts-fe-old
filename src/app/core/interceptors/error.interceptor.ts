@@ -20,7 +20,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   // if in this list, then no error modal
   whiteList = [
-    {status: 404, methods: ['GET', 'POST'],  url: new RegExp(`^${environment.apiUrl}api/login`)}
+    {status: 404, methods: ['GET', 'POST'],  url: new RegExp(`^${environment.apiUrl}api/login`)},
+    {status: 400, methods: ['POST'],  url: new RegExp(`^${environment.apiUrl}api/register`)},
   ];
 
   constructor(private progressService: ProgressService, public dialog: MatDialog, private router: Router) {
@@ -79,7 +80,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     let found = false;
     this.whiteList
       .forEach(item => {
-        if (resp.status == 404 && _.includes(item.methods, method) && item.url.test(resp.url)) {
+        if (resp.status == item.status && _.includes(item.methods, method) && item.url.test(resp.url)) {
           found = true;
         }
       })

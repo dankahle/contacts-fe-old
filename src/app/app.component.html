@@ -1,6 +1,5 @@
 <dk-progress></dk-progress>
-<div *ngIf="!!user">
-  Welcome: {{user.name}}<br>
-  <a href="javascript:void(0)" (click)="logout()">logout</a>
+<div *ngIf="!!user" style="30px">
+  Welcome: {{user.name}}  <a href="javascript:void(0)" (click)="logout()">logout</a>
 </div>
 <router-outlet></router-outlet>

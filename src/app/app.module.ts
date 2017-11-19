@@ -8,11 +8,10 @@ import {RouterModule, Routes} from "@angular/router";
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import 'hammerjs';
 import {Store} from "./core/services/store";
-import {LoginComponent} from "./shared/components/login/login.component";
+import {LoginComponent} from "./login/login/login.component";
+import {LoginModule} from "./login/login.module";
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: LoginComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -20,6 +19,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { enableTracing: false }),
+    LoginModule,
     ContactsModule,
     CoreModule,
     SharedModule
