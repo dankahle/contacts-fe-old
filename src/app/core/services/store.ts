@@ -1,8 +1,9 @@
 
 import {Injectable} from "@angular/core";
-import {INITIAL_STATE, InitialState} from "./initial-state";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
+import {INITIAL_STATE, InitialState} from "../models/initial-state";
+import {User} from "../models/user";
 
 @Injectable()
 /**
@@ -27,11 +28,10 @@ export class Store {
     }
   }
 
-  updateMessageCount(val:number) {
-    this.state.messageCount = val;
+  updateUser(user: User) {
+    this.state.user = user;
     this.publish();
   }
-
   publish() {
     this.state$.next(this.state);
     if (this.logState === true) {

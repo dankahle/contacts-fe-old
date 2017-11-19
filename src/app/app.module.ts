@@ -5,12 +5,14 @@ import {ContactsModule} from "./contacts/contacts.module";
 import {CoreModule} from "./core/core.module";
 import {SharedModule} from "./shared/shared.module";
 import {RouterModule, Routes} from "@angular/router";
-import {InitializationGuard} from "./initialization.guard";
 import {PageNotFoundComponent} from './shared/components/page-not-found/page-not-found.component';
 import 'hammerjs';
-import {Store} from "./core/store";
+import {Store} from "./core/services/store";
+import {LoginComponent} from "./shared/components/login/login.component";
 
 const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: LoginComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -25,7 +27,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent
   ],
-  providers: [InitializationGuard],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

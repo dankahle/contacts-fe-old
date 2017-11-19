@@ -1,6 +1,4 @@
 <div *ngFor="let contact of contacts">
   {{contact._id}} - {{contact.name}} <a href [routerLink]="contact.id" routerLinkActive="active">detail</a>
 </div>
-message count: {{messageCount}}<br>
-<button (click)="store.updateMessageCount(5)">update message count</button><br>
 <router-outlet></router-outlet>

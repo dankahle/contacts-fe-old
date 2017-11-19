@@ -1,7 +1,7 @@
-
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import {
   HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
   HttpResponse
@@ -11,62 +11,74 @@ import {ProgressService} from "../services/progress.service";
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {ErrorModalComponent} from "../../shared/components/error-modal/error-modal.component";
 import {Router} from "@angular/router";
-
+import {errorCodes} from "../services/error-codes";
+import * as _ from 'lodash';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private progressService: ProgressService, public dialog: MatDialog, private router: Router) {}
+  constructor(private progressService: ProgressService, public dialog: MatDialog, private router: Router) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next
       .handle(req)
       .do(event => {
       })
-      .catch(err => {
+      .catch(resp => {
         this.progressService.hideProgressBar();
+
+        let bypassModal = false;
+        whiteList()
+          .forEach(x => {
+            if (resp.status == 404 && x.url.test(resp.url)) {
+              bypassModal = true;
+            }
+          })
+
+        // base.errorHandler will always have a statusCode, so if not there, then server is down, so set {message, errorCode}
+        const err = resp.error.errorCode ? resp.error : {
+          message: 'Unknown server error',
+          data: {message: resp.message, status: resp.status},
+          errorCode: errorCodes.server_prefix + errorCodes.server_down
+        };
+
+        if (bypassModal) {
+          return Observable.throw(err);
+        }
+
+        if (err.errorCode === errorCodes.server_prefix + errorCodes.user_not_authenticated) {
+          this.router.navigateByUrl('/login');
+        }
+
         const config = <MatDialogConfig> {
-          data: {error: err.error},
+          data: {error: err}, // dankfix: will resp.error be undefined for server errors?
           width: '300px'
         }
         this.dialog.open(ErrorModalComponent, config)
           .afterClosed()
           .subscribe(result => {
             //dankfix: if we have a bad id, might not be able to get out of that route? was a problem with deep linked contacts
-            // maybe not so with labels instead? Watch the err.error, i.e. that's only for your api, might not be there
-            // if (err.error && err.error.errorCode === 'xxx-xxxx') {
+            // maybe not so with labels instead? Watch the resp.error, i.e. that's only for your api, might not be there
+            // if (resp.error && resp.error.errorCode === 'xxx-xxxx') {
             //   this.router.navigateByUrl('/');
             // }
           })
-        return Observable.of(err);
+        return Observable.throw(err);
       })
   }
 
 }
 
-
-
-/*
-
-
-class HttpResponseBase {
-  headers: HttpHeaders
-  status: number
-  statusText: string
-  url: string|null
-  ok: boolean
-  type: HttpEventType.Response|HttpEventType.ResponseHeader
-}
-
-class HttpResponse<T> extends HttpResponseBase {
-  body: T|null
-  type: Response
-  clone(update: {...}): HttpResponse<any>
-}
-
-class HttpErrorResponse extends HttpResponseBase implements Error {
-  name: 'HttpErrorResponse'
-  message: string
-  error: any|null
-  ok: false
-}
+/**
+ * whiteList
+ * @desc - Some 404's are an error (unexpected), while others are handled in the code (expected). We'll whitelist
+ * the expected ones so we won't get an error modal in that case
+ * @returns {[{status: number; reg: RegExp}]}
  */
+function whiteList() {
+  return [
+    {status: 404, methods: ['GET', 'POST'],  url: new RegExp(`^${environment.apiUrl}api/login`)}
+  ];
+}
+

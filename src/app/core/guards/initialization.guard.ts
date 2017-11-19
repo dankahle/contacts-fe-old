@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
-import {Init1, Init2, Init3, Init4, Init5} from "./core/services/init-service";
+import {Init1, Init2, Init3, Init4, Init5} from "../services/init-service";
 import {merge} from "rxjs/observable/merge";
 
 @Injectable()
@@ -39,6 +39,7 @@ export class InitializationGuard implements CanActivate {
         return true;
       }
       // console.log('init guard start');
+      // an example of a complex initialization flow with dependencies of dependencies
       return Observable.forkJoin(this.init1.get(), this.init2.get())
         .mergeMap(x => {
           return Observable.forkJoin(this.init3.get(), this.init4.get());

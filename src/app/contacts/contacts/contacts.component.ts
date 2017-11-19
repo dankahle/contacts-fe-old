@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ContactsService} from "../contacts.service";
 import {Contact} from "./contact";
-import {Store} from "../../core/store";
+import {Store} from "../../core/services/store";
 
 @Component({
   selector: 'dk-contacts',

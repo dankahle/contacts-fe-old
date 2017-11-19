@@ -11,12 +11,12 @@ constructor(private http:HttpClient) {}
 
   getAll() {
     const params = new HttpParams().set('hideSpinner', 'true');
-    return this.http.get<Contact[]>(`${this.apiUrl}/api/contacts`, {params: params})
+    return this.http.get<Contact[]>(`${this.apiUrl}api/contacts`, {params: params})
   }
 
   getOne(id:number) {
-    console.log(this.apiUrl + '/api/contacts');
-    return this.http.get<Contact>(`${this.apiUrl}/api/contacts/${id}`)
+    console.log(this.apiUrl + 'api/contacts');
+    return this.http.get<Contact>(`${this.apiUrl}api/contacts/${id}`)
   }
 
 }

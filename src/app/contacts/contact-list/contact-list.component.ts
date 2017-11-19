@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {Contact} from "../contacts/contact";
-import {ContactsService} from "../contacts.service";
-import {Store} from "../../core/store";
+import {Store} from "../../core/services/store";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'dk-contact-list',
@@ -13,12 +13,14 @@ export class ContactListComponent {
   contacts:Contact[];
   messageCount: number;
 
-  constructor(contactsService:ContactsService, protected store: Store) {
+  constructor(route: ActivatedRoute, protected store: Store) {
     store.subscribe(state => {
       this.messageCount = state.messageCount;
     });
 
-    contactsService.getAll()
-      .subscribe(contacts => this.contacts = contacts);
+    route.data.subscribe(data => {
+      return this.contacts = data.contacts;
+    });
   }
+
 }
