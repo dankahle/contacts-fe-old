@@ -13,6 +13,7 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
 import {ContactListResolve} from "./contact-list/contact-list.resolve";
 import {ContactDetailRouteComponent} from "./contact-detail/contact-detail-route.component";
 import {AuthGuard} from "../core/guards/auth.guard";
+import { ContactListItemComponent } from './contact-list-item/contact-list-item.component';
 
 export const contactRoutes: Routes = [
   {
@@ -34,7 +35,7 @@ export const contactRoutes: Routes = [
     SharedModule,
     CoreModule
   ],
-  declarations: [ContactsComponent, ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent],
+  declarations: [ContactsComponent, ContactListComponent, ContactDetailRouteComponent, ContactDetailComponent, ContactListItemComponent],
   entryComponents: [ContactDetailComponent],
   exports: [ContactsComponent, RouterModule],
   providers: [ContactsService, ContactListResolve]

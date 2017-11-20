@@ -1,5 +1,6 @@
 <dk-progress></dk-progress>
-<div *ngIf="!!globals.user" style="height:30px;">
-  Welcome: {{globals.user.name}}  <a href="javascript:void(0)" (click)="logout()">logout</a>
+<dk-header></dk-header>
+<div>
+  <dk-leftnav></dk-leftnav>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Contact} from "./contacts/contact";
+import {Contact} from "./contacts.model";
 
 @Injectable()
 export class ContactsService {

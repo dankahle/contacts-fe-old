@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {Contact} from "../contacts/contact";
 import {Store} from "../../core/services/store";
 import {ActivatedRoute} from "@angular/router";
+import {Contact} from "../contacts.model";
 
 @Component({
   selector: 'dk-contact-list',

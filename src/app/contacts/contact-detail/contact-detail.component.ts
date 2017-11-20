@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {IContact} from "../contacts.model";
+import {Contact} from "../contacts.model";
 
 @Component({
   selector: 'dk-contact-detail',
@@ -9,7 +9,7 @@ import {IContact} from "../contacts.model";
   encapsulation: ViewEncapsulation.None
 })
 export class ContactDetailComponent {
-  contact: IContact;
+  contact: Contact;
 
   constructor(public dialogRef: MatDialogRef<ContactDetailComponent>, @Inject(MAT_DIALOG_DATA) data: any) {
     this.contact = data.contact;

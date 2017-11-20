@@ -8,11 +8,4 @@ import {Globals} from "./core/services/globals";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private userService: UserService, protected globals: Globals) {
-  }
-
-  logout() {
-    this.userService.logout();
-  }
-
 }

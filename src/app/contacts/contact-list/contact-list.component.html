@@ -1,4 +1,5 @@
-<div *ngFor="let contact of contacts">
-  {{contact._id}} - {{contact.name}} <a href [routerLink]="contact.id" routerLinkActive="active">detail</a>
+<div class="outline">
+  <div *ngFor="let contact of contacts">
+  <dk-contact-list-item [contact]="contact"></dk-contact-list-item>
 </div>
-<router-outlet></router-outlet>
+</div>

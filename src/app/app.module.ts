@@ -11,6 +11,7 @@ import {Store} from "./core/services/store";
 import {LoginComponent} from "./login/login/login.component";
 import {LoginModule} from "./login/login.module";
 import {Globals} from "./core/services/globals";
+import {MainModule} from "./main/main.module";
 
 const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
     LoginModule,
     ContactsModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    MainModule
   ],
   declarations: [
     AppComponent
@@ -35,5 +37,6 @@ export class AppModule {
 
   // initialize the Store
   constructor(store: Store, globals: Globals) {
+    console.log(document.cookie);
   }
 }

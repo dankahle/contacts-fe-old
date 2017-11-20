@@ -4,4 +4,5 @@ import {User} from "../models/user";
 @Injectable()
 export class Globals {
   user: User;
+  initialized: boolean
 }

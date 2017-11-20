@@ -1,26 +1,7 @@
 
 
 
-const req = {status:404, url: '/api/login/current'}
-let found = false;
-whiteList()
-  .forEach(x => {
-    if (req.status == 404 && x.reg.test(req.url)) {
-      found = true;
-    }
-  })
-
-console.log(found);
-
-
-
-
-function whiteList() {
-  return [
-    {status: 404, reg: new RegExp('^/api/login')}
-  ];
-}
-
+JSON.parse(null);
 
 
 

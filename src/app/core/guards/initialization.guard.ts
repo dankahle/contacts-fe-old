@@ -6,6 +6,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import {Init1, Init2, Init3, Init4, Init5} from "../services/init-service";
 import {merge} from "rxjs/observable/merge";
+import {Globals} from "../services/globals";
 
 @Injectable()
 /**
@@ -13,9 +14,9 @@ import {merge} from "rxjs/observable/merge";
  * desc - provide a complex hierarchy of initialization "before" app starts up including dependecies of dependencies
  */
 export class InitializationGuard implements CanActivate {
-  initialized = false;
 
   constructor(
+    private globals: Globals,
     private init1: Init1,
     private init2: Init2,
     private init3: Init3,
@@ -35,7 +36,7 @@ export class InitializationGuard implements CanActivate {
   }
 
     init() {
-      if (this.initialized) {
+      if (this.globals.initialized) {
         return true;
       }
       // console.log('init guard start');
@@ -49,7 +50,7 @@ export class InitializationGuard implements CanActivate {
         })
         .map(x => {
           // console.log('init guard end');
-          this.initialized = true;
+          this.globals.initialized = true;
           return true;
         });
     }

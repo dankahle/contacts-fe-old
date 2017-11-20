@@ -1,7 +1,7 @@
 
 
-export interface IContact {
-  id?: number;
+export interface Contact {
+  _id?: number;
   name?: string;
 }
 
