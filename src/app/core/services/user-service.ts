@@ -42,8 +42,11 @@ export class UserService {
   }
 
   logout() {
-    this.globals.user = undefined;
-    this.router.navigateByUrl('/login');
+    return this.http.delete<any>(environment.apiUrl + 'api/login')
+      .map(() => {
+        this.globals.user = undefined;
+        this.router.navigateByUrl('/login');
+      })
   }
 
   register(_user) {

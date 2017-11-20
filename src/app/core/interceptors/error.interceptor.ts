@@ -35,12 +35,24 @@ export class ErrorInterceptor implements HttpInterceptor {
       .catch(resp => {
         this.progressService.hideProgressBar();
 
-        // base.errorHandler will always have a statusCode, so if not there, then server is down, so set {message, errorCode}
-        const err = resp.error && resp.error.errorCode ? resp.error : {
-          message: 'Unknown server error',
-          data: {message: resp.message, status: resp.status},
-          errorCode: errorCodes.server_prefix + errorCodes.server_unknown_error
-        };
+        let err;
+        if (resp.error && resp.error.errorCode) {
+          err = resp.error;
+        } else if (resp.error && resp.error.error) {
+            err = resp.error.error;
+            if (!resp.error.error.errorCode) {
+              err.errorCode = errorCodes.server_prefix + errorCodes.server_unknown_error;
+            }
+        } else {
+          err ={
+            message: 'Unknown server error',
+              data: {
+              message: resp.message,
+                url: resp.url,
+                status: resp.status},
+            errorCode: errorCodes.server_prefix + errorCodes.server_unknown_error
+          }
+        }
 
         if (this.whiteListed(resp, req.method)) {
           return Observable.throw(err);
