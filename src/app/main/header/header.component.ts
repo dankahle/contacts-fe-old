@@ -5,7 +5,8 @@ import {UserService} from "../../core/services/user-service";
 @Component({
   selector: 'dk-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  // styleUrls: ['./header.component.scss'],
+  styleUrls: ['./test.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {

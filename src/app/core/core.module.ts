@@ -21,6 +21,7 @@ import {Globals} from "./services/globals";
     HttpClientModule,
     RouterModule
   ],
+  exports: [HttpClientModule],
   providers: [Store, Globals, Init1, Init2, Init3, Init4, Init5, ProgressService, UserService,
     {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true},

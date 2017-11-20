@@ -1,6 +1,10 @@
-<dk-progress></dk-progress>
-<dk-header></dk-header>
-<div>
-  <dk-leftnav *ngIf="globals.user"></dk-leftnav>
-  <router-outlet></router-outlet>
+<div style="height:100%;">
+  <dk-progress></dk-progress>
+  <div style="height:100%;">
+    <dk-header></dk-header>
+    <div fxLayout fxLayoutAlign="space-between stretch">
+      <dk-leftnav *ngIf="globals.user"></dk-leftnav>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

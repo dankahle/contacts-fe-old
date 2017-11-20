@@ -8,14 +8,13 @@ import {MaxValidator} from "./validators/max.validator";
 import {MaterialIndexModule} from "./material-index/material-index.module";
 import {ProgressComponent} from "./components/progress/progress.component";
 import {ErrorModalComponent} from "./components/error-modal/error-modal.component";
-import { LoginComponent } from '../login/login/login.component';
-import {RouterModule} from "@angular/router";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialIndexModule,
-    RouterModule,
+    FlexLayoutModule,
     FormsModule
   ],
   declarations: [PageNotFoundComponent, ForbiddenNameValidator, MinValidator, MaxValidator, ProgressComponent, ErrorModalComponent],

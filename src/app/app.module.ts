@@ -36,7 +36,5 @@ const appRoutes: Routes = [
 export class AppModule {
 
   // initialize the Store
-  constructor(store: Store, globals: Globals) {
-    console.log(document.cookie);
-  }
+  constructor(store: Store, globals: Globals) {}
 }

@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactsComponent } from './contacts/contacts.component';
 import {ContactsService} from "./contacts.service";
-import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "../core/core.module";
-import {FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import {InitializationGuard} from "../core/guards/initialization.guard";
 import {SharedModule} from "../shared/shared.module";
@@ -29,8 +27,6 @@ export const contactRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
-    FormsModule,
     RouterModule.forChild(contactRoutes),
     SharedModule,
     CoreModule
