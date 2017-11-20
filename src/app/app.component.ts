@@ -8,4 +8,8 @@ import {Globals} from "./core/services/globals";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(protected globals: Globals) {
+  }
+
 }

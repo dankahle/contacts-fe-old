@@ -1,6 +1,6 @@
 <dk-progress></dk-progress>
 <dk-header></dk-header>
 <div>
-  <dk-leftnav></dk-leftnav>
+  <dk-leftnav *ngIf="globals.user"></dk-leftnav>
   <router-outlet></router-outlet>
 </div>
